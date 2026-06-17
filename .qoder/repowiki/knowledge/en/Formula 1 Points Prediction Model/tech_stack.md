@@ -1,0 +1,1 @@
+PyTorch for neural network modeling, scikit-learn for preprocessing and splitting, pandas for data manipulation.

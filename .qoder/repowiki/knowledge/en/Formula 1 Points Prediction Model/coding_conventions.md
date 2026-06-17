@@ -1,0 +1,3 @@
+- Numerical features are normalized using Z-score standardization (mean subtraction and division by standard deviation) before being fed into the network.
+- Categorical identifiers are re-encoded to contiguous 0-indexed integers using LabelEncoder to optimize PyTorch embedding layer lookups.
+- Model outputs are clamped to a minimum of zero using `torch.clamp` to enforce the physical constraint that championship points cannot be negative.

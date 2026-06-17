@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APEX VELOCITY | F1 Predictor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#c00500",
+                        "on-surface": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-container": "#656464",
+                        "primary": "#b30400",
+                        "surface-dim": "#dadada",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#ffb4a8",
+                        "inverse-surface": "#2f3131",
+                        "surface-bright": "#f9f9f9",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "tertiary-fixed": "#56fae5",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#e10600",
+                        "on-primary-fixed": "#410100",
+                        "surface": "#f9f9f9",
+                        "secondary-container": "#e5e2e1",
+                        "primary-fixed": "#ffdad4",
+                        "outline-variant": "#e9bcb5",
+                        "on-tertiary-fixed": "#00201c",
+                        "tertiary-fixed-dim": "#29dec9",
+                        "tertiary-container": "#007e72",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#cdfff5",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-primary-container": "#fff2f0",
+                        "on-primary-fixed-variant": "#930300",
+                        "on-secondary-fixed-variant": "#474646",
+                        "secondary": "#5f5e5e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "tertiary": "#006359",
+                        "on-secondary": "#ffffff",
+                        "outline": "#936e68",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5e3f3a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                        "display-lg": ["72px", {"lineHeight": "76px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+            overflow-x: hidden;
+        }
+        .speed-shadow:hover {
+            box-shadow: 0 10px 40px -10px rgba(179, 4, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- Header Section -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-surface-variant transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">
+                APEX VELOCITY
+            </div>
+<nav class="hidden md:flex gap-10 items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Home</a>
+<a class="text-secondary font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#predictor">Predict</a>
+<a class="text-secondary font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#about">About</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container font-label-lg text-label-lg px-6 py-2 uppercase tracking-widest hover:brightness-110 transition-all">
+                Start Prediction
+            </button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
+<div class="absolute inset-0 z-0">
+<img alt="High-speed Formula 1 racing car at sunset" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF3atxM7VyWyEJPdBgXznYWGEvdw4MXKBDblEzKeeF83UwMr7_l3AYjBbrFrbRcrKtjM1oZDnlX_nq-1olj3AKxO6EOxdcHmR1jSxgzikw1D0jHvbwoM-4e2X3t8NgTDeVfYHkjxJrDe23tBgQOCxruaW6XsMVuwEORZNmpGtF2rkBvPoHC9Ron85GBVe_9yEgTGe8skEOp8F5pDnPOuC7PPpE2l31_JT4xBNfxnnJABLaylxYxyQo_ppjohlJoKVwk0fG1e8aI6s"/>
+<div class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-gutter w-full">
+<div class="max-w-2xl">
+<span class="inline-block py-1 px-3 bg-primary text-on-primary font-label-sm text-label-sm mb-6">LIVE TELEMETRY ACTIVE</span>
+<h1 class="font-display-lg text-display-lg mb-6 leading-tight">Formula 1 Race Outcome Prediction</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-8 leading-relaxed max-w-lg">
+                        Leveraging ultra-high-frequency sensor data and neural architectures to simulate over 100,000 race scenarios per second. Precision engineered for the ultimate fans.
+                    </p>
+<div class="flex gap-4">
+<a class="bg-primary text-on-primary font-label-lg text-label-lg px-10 py-4 hover:shadow-lg transition-all flex items-center gap-2" href="#predictor">
+                            JUMP TO PREDICT <span class="material-symbols-outlined">bolt</span>
+</a>
+<button class="border-2 border-on-surface text-on-surface font-label-lg text-label-lg px-10 py-4 hover:bg-on-surface hover:text-white transition-all">
+                            VIEW ARCHIVE
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Intelligence Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-5">
+<h2 class="font-headline-lg text-headline-lg mb-6">Proprietary AI Logic</h2>
+<div class="space-y-8">
+<div class="border-l-4 border-primary pl-6">
+<div class="font-display-lg text-headline-lg text-primary mb-1">94.2% Accuracy</div>
+<p class="text-secondary">Measured across the last 3 seasons of live qualifying data and race pace simulations.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-6">
+<div class="font-label-sm text-label-sm text-secondary uppercase mb-2">Data Points</div>
+<div class="font-headline-md text-headline-md">2.8B+</div>
+</div>
+<div class="bg-surface-container p-6">
+<div class="font-label-sm text-label-sm text-secondary uppercase mb-2">Latency</div>
+<div class="font-headline-md text-headline-md">14ms</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-7">
+<div class="bg-white p-2 border border-surface-variant shadow-sm aspect-video overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated data visualization dashboard showing multiple real-time telemetry graphs and race tracking interfaces in a clinical high-tech setting. The interface is dominated by sharp white lines and deep red accent peaks, reflecting an engineered excellence and professional racing environment. The lighting is bright and industrial, emphasizing clarity and high-frequency data processing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbv0hS7YvwqaU5qXxwlBzWZdHwCbVBShDD7IKYxkZZ6npgeZk55cGiGwQwWU44HRJHSNdXZKwKn2DQIeGOYr9J_vUDSfLvD8ckPz8ik_5NltDYwE0xzr-bWLKw7sMxvsCU1NJkb51BGtR-TUTvhbORCeFnD2xGCmP1s7i_QSlliGThRnug8dOiFDJrutegG9Xt_aozWSssW5iwGR9vNBtEglfdlrBCAaxEZbA_lOORvdG1atU5AoOmBnqzXqqWmU_NeGK259RLVSE"/>
+<div class="absolute inset-0 bg-primary/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-primary animate-pulse">analytics</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Predictor (Main Feature) -->
+<section class="py-24 bg-white scroll-mt-16" id="predictor">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="mb-12 text-center">
+<h2 class="font-headline-lg text-headline-lg mb-4">Configuration Engine</h2>
+<p class="text-secondary max-w-xl mx-auto">Input parameters for the next Grand Prix to activate the simulation sequence.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-base">
+<!-- Form Control -->
+<div class="lg:col-span-2 bg-surface-container-low p-base md:p-10 border border-surface-variant">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase text-secondary">Driver Selection</label>
+<select class="w-full bg-white border-0 border-b border-surface-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md transition-all">
+<option>Max Verstappen</option>
+<option>Lewis Hamilton</option>
+<option>Charles Leclerc</option>
+<option>Lando Norris</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase text-secondary">Constructor</label>
+<select class="w-full bg-white border-0 border-b border-surface-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md transition-all">
+<option>Red Bull Racing</option>
+<option>Mercedes AMG</option>
+<option>Ferrari</option>
+<option>McLaren</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase text-secondary">Circuit Profile</label>
+<select class="w-full bg-white border-0 border-b border-surface-variant focus:border-primary focus:ring-0 px-0 py-3 font-body-md transition-all">
+<option>Monaco Grand Prix (Street)</option>
+<option>Silverstone (High Speed)</option>
+<option>Spa-Francorchamps</option>
+<option>Suzuka</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase text-secondary">Weather Conditions</label>
+<div class="flex gap-4 pt-2">
+<button class="flex-1 py-2 border border-primary bg-primary text-white text-xs font-bold uppercase tracking-wider">Dry</button>
+<button class="flex-1 py-2 border border-surface-variant hover:border-primary transition-colors text-xs font-bold uppercase tracking-wider">Inter</button>
+<button class="flex-1 py-2 border border-surface-variant hover:border-primary transition-colors text-xs font-bold uppercase tracking-wider">Wet</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 bg-white border border-surface-variant border-dashed">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-primary animate-spin">refresh</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Awaiting Telemetry Sync</div>
+<div class="text-xs text-secondary">Feed: FIA Official Source - LIVE</div>
+</div>
+</div>
+<button class="bg-on-surface text-white font-label-sm text-label-sm px-8 py-3 uppercase hover:bg-primary transition-all">
+                                RUN PREDICTION
+                            </button>
+</div>
+</div>
+<!-- Sidebar Card -->
+<div class="lg:col-span-1 space-y-base">
+<div class="bg-white border border-surface-variant p-8">
+<div class="font-label-sm text-label-sm text-primary uppercase mb-4 tracking-widest">Active Circuit Profile</div>
+<h3 class="font-headline-md text-headline-md mb-2">MONACO GP</h3>
+<p class="text-secondary text-sm mb-6 leading-relaxed">Narrow street circuit with high downforce requirements and zero margin for error.</p>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-secondary">Grip Level</span>
+<span class="font-bold">LOW</span>
+</div>
+<div class="h-1 bg-surface-container">
+<div class="h-1 bg-primary w-1/3"></div>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-secondary">Overtaking Difficulty</span>
+<span class="font-bold">EXTREME</span>
+</div>
+<div class="h-1 bg-surface-container">
+<div class="h-1 bg-primary w-[95%]"></div>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-secondary">Tire Wear</span>
+<span class="font-bold">MODERATE</span>
+</div>
+<div class="h-1 bg-surface-container">
+<div class="h-1 bg-primary w-1/2"></div>
+</div>
+</div>
+</div>
+<div class="bg-primary p-8 text-on-primary">
+<div class="font-label-sm text-label-sm uppercase mb-2">Neural Network State</div>
+<div class="text-2xl font-bold italic mb-4 tracking-tighter">OPTIMAL FLOW</div>
+<div class="text-xs opacity-80">Connected to 48 GPU nodes across European clusters. Ready for ingestion.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About & Philosophy -->
+<section class="py-32 bg-surface-container-lowest relative overflow-hidden" id="about">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<div class="order-2 md:order-1">
+<div class="relative">
+<img alt="Technical engineer analyzing Formula 1 telemetry" class="w-full aspect-[4/5] object-cover border border-surface-variant grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4xUwvTdP0bjJfBFIrnaRtjH81qvWU3M0NnV9LA5ZuxnMCE5I0WctEiOPWe1fDJAlfp_cKJVq5j1CSkXuUTT2Pa64SuEQmsiV522Khacx-FJGEIl82MW4VrPHhYAeJHbh3u-oY7EXKv2n9Vd004zu-V72EZUFAylBoqbm6cQJL8Sbp1DGEPQc0JrC8eQHuKVQxX5bJrS8LMKvWE8gDGvHo7cn7PCPUsNoJG-SvXz7vL6cKIUi10gRKxf21w64a0jwbYeirCxrPo5w"/>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary flex items-center justify-center p-4">
+<div class="text-white text-center">
+<div class="text-3xl font-bold">14</div>
+<div class="text-[10px] font-bold uppercase tracking-widest">Global Nodes</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 md:order-2">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[.3em] block mb-6">Our Philosophy</span>
+<h2 class="font-headline-lg text-headline-lg mb-8 leading-tight">Data is the Soul of Speed</h2>
+<div class="space-y-6 text-secondary font-body-lg text-body-lg leading-relaxed">
+<p>
+                                In Formula 1, intuition is a luxury we can no longer afford. Every millisecond, every degree of tire temperature, and every liter of fuel is a variable in an infinite equation of performance.
+                            </p>
+<p>
+                                Apex Velocity was born from the belief that transparency in telemetry creates a more profound connection between the sport and its observers. We bridge the gap between the pit wall and the grandstand.
+                            </p>
+<p>
+                                By utilizing high-fidelity machine learning, we translate the mechanical chaos of a Grand Prix weekend into actionable, predictable intelligence.
+                            </p>
+</div>
+<div class="mt-12 flex items-center gap-6">
+<div class="w-12 h-[1px] bg-primary"></div>
+<div class="font-label-lg text-label-lg uppercase tracking-widest">Engineered by APEX</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Section -->
+<footer class="bg-surface-container dark:bg-surface-container border-t border-surface-variant w-full py-12 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center gap-base px-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tighter">
+                APEX VELOCITY
+            </div>
+<div class="flex flex-wrap justify-center gap-8 text-center md:text-left">
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-all" href="#">Cookie Policy</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-all" href="#">Contact Us</a>
+</div>
+<div class="font-label-sm text-label-sm text-secondary uppercase opacity-80 mt-6 md:mt-0 max-w-xs text-center md:text-right">
+                © 2024 APEX VELOCITY. ALL RIGHTS RESERVED. DATA PROVIDED BY FIA OFFICIAL SOURCES.
+            </div>
+</div>
+</footer>
+<script>
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header transparency shift on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-sm');
+                header.classList.remove('border-transparent');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+
+        // Micro-interaction: Dynamic status updates
+        const statusText = document.querySelector('.animate-pulse');
+        const statuses = ['SYNCHRONIZING', 'UPDATING MESH', 'LATENCY OPTIMIZED', 'FETCHING PITS'];
+        let i = 0;
+        setInterval(() => {
+            if (statusText) {
+                // This is a subtle visual indicator, we don't need to change text here for this brief
+            }
+        }, 3000);
+    </script>
+</body></html>

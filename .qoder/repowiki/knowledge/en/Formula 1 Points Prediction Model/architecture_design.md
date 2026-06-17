@@ -1,0 +1,4 @@
+- Data ingestion merges `results.csv`, `races.csv`, `constructors.csv`, and `circuits.csv` to create a feature set of grid position, constructor ID, circuit ID, and year.
+- Preprocessing normalizes numerical features (grid, year) and encodes categorical IDs (constructor, circuit) using `sklearn.preprocessing.LabelEncoder`, saving artifacts to `model/preprocessing.json`.
+- The model (`F1PointsNet`) uses PyTorch embedding layers for categorical inputs and a sequential MLP with BatchNorm and Dropout for regression, outputting clamped non-negative points.
+- Training employs Adam optimizer, MSE loss, and learning rate scheduling with early stopping, saving the best model state to `model/best_model.pth`.

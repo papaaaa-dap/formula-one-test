@@ -1,0 +1,1 @@
+Execute `python train.py` to start the training process, which automatically loads CSVs from the `data/` directory and saves model artifacts to the `model/` directory.

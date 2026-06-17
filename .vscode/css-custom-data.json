@@ -1,0 +1,13 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4 directive for defining custom theme values (colors, fonts, spacing, etc.) as CSS custom properties."
+    },
+    {
+      "name": "@import",
+      "description": "Imports a CSS file. Tailwind CSS v4 uses @import \"tailwindcss\" to include the framework."
+    }
+  ]
+}

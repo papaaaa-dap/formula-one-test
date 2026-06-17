@@ -1,0 +1,1 @@
+Trains a neural network to predict F1 driver points based on grid position, constructor, circuit, and year using historical race data.
